@@ -3,43 +3,43 @@
   <div>
     <h1>Jobs Available.</h1>
 
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <td>JOB=ID</td>
-          <td>title</td>
-          <td>description</td>
-          <td>requirements</td>
-          <td>location</td>
-          <td>timings</td>
-          <td>salary</td>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr v-for="item in items" :key="item.id">
-          <td>{{ item.id }}</td>
-          <td>{{ item.job_title }}</td>
-          <td>{{ item.job_Description }}</td>
-          <td>{{ item.job_requirements }}</td>
-          <td>{{ item.job_location }}</td>
-          <td>{{ item.job_timings }}</td>
-          <td>{{ item.job_salary }}</td>
-          <td>
+    <div v-for="item in items" :key="item.id">
+      <div class="card" style="width: ">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.job_title }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            {{ item.job_requirements }}
+          </h6>
+          <p class="card-text">
+            {{ item.job_Description }}
+          </p>
+          <p class="card-text">Location: {{ item.job_location }}</p>
+          <p class="card-text">salary: {{ item.job_salary }}</p>
+          <p class="card-text">timing: {{ item.job_timings }}</p>
+          <div v-if="item.applied === false">
+            <p class="btn btn-success">Available: Still Open</p>
+          </div>
+          <div v-else-if="item.applied === true">
+            <p class="btn btn-danger">Applied: {{ item.applied }}</p>
+          </div>
+          <div style="float: right">
             <router-link
               :to="{ name: 'Edit', params: { id: item.id } }"
               class="btn btn-primary"
-              >Edit</router-link
+              >edit</router-link
             >
-          </td>
-          <td>
-            <button class="btn btn-danger" v-on:click="deleteItem(item.id)">
+            <router-link
+              :to="{ name: 'Apply', params: { id: item.title } }"
+              class="btn btn-primary"
+              >Apply</router-link
+            >
+            <!-- <button class="btn btn-danger" v-on:click="deleteItem(item.id)">
               Delete
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            </button> -->
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -60,13 +60,15 @@ export default {
       let uri = "http://localhost:8000/jobs";
       this.axios.get(uri).then((response) => {
         this.items = response.data;
+        console.log(response.data);
       });
     },
     deleteItem(job_id) {
       let uri = "http://localhost:8000/jobs/" + job_id;
       this.items.splice(job_id, 1);
-      this.axios.delete(uri);
-      console.log(this.uri + job_id);
+      // this.axios.delete(uri);
+      // console.log(this.uri);
+      return this.axios.delete(uri);
     },
   },
 };
