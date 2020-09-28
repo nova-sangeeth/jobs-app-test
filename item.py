@@ -24,7 +24,7 @@ class Jobs(Model):
 
 
 Jobs_Pydantic = pydantic_model_creator(Jobs, name="Jobs")
-JobsIn_Pydantic = pydantic_model_creator(Jobs, name="Jobs", exclude_readonly=True)
+JobsIn_Pydantic = pydantic_model_creator(Jobs, name="JobsIn", exclude_readonly=True)
 
 
 origins = [
@@ -70,15 +70,8 @@ async def delete_job(job_id: int):
 
 @app.put("/jobs/{job_id}", response_model=Jobs_Pydantic)
 async def update_job(job_id: int, job: JobsIn_Pydantic):
-    await Jobs.filter(id=job_id).update(**job.dict(exclude_unset=True))
+    await Jobs.filter(id=job_id).update(**job.dict(exclude_unset=True, exclude={"id"}))
     return await Jobs_Pydantic.from_queryset_single(Jobs.get(id=job_id))
-
-
-# @app.put("/items/edit/{item_id}", response_model=Items)
-# async def update_item(item_id: int, item: Items):
-#     update_item_encoded = jsonable_encoder(item)
-#     items[item_id] = update_item_encoded
-#     return update_item_encoded
 
 
 register_tortoise(
