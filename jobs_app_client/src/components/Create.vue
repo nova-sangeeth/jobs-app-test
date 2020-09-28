@@ -7,22 +7,22 @@
       <div class="card-body">
         <form v-on:submit.prevent="addItem">
           <label>Job title:</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" v-model="job_title" />
 
           <label>Job desc:</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" v-model="job_description" />
 
           <label>Job requirements:</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" v-model="job_requirements" />
 
           <label>Job locations:</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" v-model="job_locations" />
 
           <label>Job timings:</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" v-model="job_timings" />
 
           <label>Job salary:</label>
-          <input type="text" class="form-control" />
+          <input type="text" class="form-control" v-model="job_salary" />
 
           <input type="submit" class="btn btn-primary" value="Add job" />
         </form>
