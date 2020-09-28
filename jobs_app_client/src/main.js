@@ -13,6 +13,7 @@ import App from './App.vue'
 import Create from './components/Create.vue'
 import Edit from './components/Edit.vue'
 import Index from './components/Index.vue'
+import Apply from './components/Apply.vue'
 
 
 Vue.use(VueRouter);
@@ -35,6 +36,11 @@ const routes = [
     name: 'Index',
     path: '/index',
     component: Index
+  },
+  {
+    name: 'Apply',
+    path: '/apply',
+    component: Apply
   },
 ];
 
