@@ -21,6 +21,7 @@ class Jobs(Model):
     job_location = fields.CharField(128)
     job_timings = fields.CharField(128)
     job_salary = fields.IntField()
+    applied = fields.BooleanField(default=False)
 
 
 Jobs_Pydantic = pydantic_model_creator(Jobs, name="Jobs")
@@ -45,7 +46,7 @@ app.add_middleware(
 
 @app.post("/jobs/add")
 async def create_job(job: JobsIn_Pydantic):
-    job_obj = await Jobs.create(**job.dict(exclude_unset=True))
+    job_obj = await Jobs.create(**job.dict(exclude_unset=True, exclude={"id"}))
     return await Jobs_Pydantic.from_tortoise_orm(job_obj)
 
 
@@ -61,6 +62,13 @@ async def get_job_by_id(job_id: int):
     return await Jobs_Pydantic.from_queryset_single(Jobs.get(id=job_id))
 
 
+# apply by id
+@app.get("/jobs/{job_id}/apply")
+async def get_job_by_id(job_id: int):
+
+    return await Jobs_Pydantic.from_queryset_single(Jobs.get(id=job_id))
+
+
 # delete_by_id
 @app.delete("/jobs/{job_id}")
 async def delete_job(job_id: int):
@@ -68,6 +76,7 @@ async def delete_job(job_id: int):
     return {"deleted": "object"}
 
 
+# update_by_id
 @app.put("/jobs/{job_id}", response_model=Jobs_Pydantic)
 async def update_job(job_id: int, job: JobsIn_Pydantic):
     await Jobs.filter(id=job_id).update(**job.dict(exclude_unset=True, exclude={"id"}))
