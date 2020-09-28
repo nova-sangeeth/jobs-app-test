@@ -68,7 +68,7 @@ async def delete_job(job_id: int):
     return {"deleted": "object"}
 
 
-@app.post("/jobs/{job_id}", response_model=Jobs_Pydantic)
+@app.put("/jobs/{job_id}", response_model=Jobs_Pydantic)
 async def update_job(job_id: int, job: JobsIn_Pydantic):
     await Jobs.filter(id=job_id).update(**job.dict(exclude_unset=True))
     return await Jobs_Pydantic.from_queryset_single(Jobs.get(id=job_id))
