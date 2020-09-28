@@ -14,7 +14,7 @@ app = FastAPI()
 
 
 class Jobs(Model):
-    # id = fields.IntField(pk=True)
+    id = fields.IntField(pk=True)
     job_title = fields.CharField(128)
     job_Description = fields.CharField(128)
     job_requirements = fields.CharField(128)
@@ -66,6 +66,12 @@ async def get_job_by_id(job_id: int):
 async def delete_job(job_id: int):
     await Jobs.filter(id=job_id).delete()
     return {"deleted": "object"}
+
+
+@app.post("/jobs/{job_id}", response_model=Jobs_Pydantic)
+async def update_job(job_id: int, job: JobsIn_Pydantic):
+    await Jobs.filter(id=job_id).update(**job.dict(exclude_unset=True))
+    return await Jobs_Pydantic.from_queryset_single(Jobs.get(id=job_id))
 
 
 # @app.put("/items/edit/{item_id}", response_model=Items)
