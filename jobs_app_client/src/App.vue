@@ -18,7 +18,7 @@
             >Job-finder</router-link
           >
         </h4>
-        <router-link :to="{ name: 'Create' }" class="nav-link"
+        <router-link :to="{ name: 'Create' }" class="btn btn-outline-primary"
           >Add new job</router-link
         >
       </ul>
