@@ -1,19 +1,26 @@
 <template>
   <div>
-    <h1>Login</h1>
+    <center><p class="display-4">Login</p></center>
     <input
       type="text"
+      class="form-control"
       name="username"
       v-model="input.username"
       placeholder="Username"
     />
+    <br />
     <input
       type="password"
+      class="form-control"
       name="password"
       v-model="input.password"
       placeholder="Password"
     />
-    <button type="button" v-on:click="login()">Login</button>
+    <center>
+      <button class="btn btn-light" type="button" v-on:click="login()">
+        Login
+      </button>
+    </center>
   </div>
 </template>
 
