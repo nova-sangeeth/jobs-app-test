@@ -44,6 +44,7 @@ export default {
   data() {
     return {
       item: {},
+      name: "",
     };
   },
   created: function () {
@@ -58,7 +59,7 @@ export default {
     },
     updateItem() {
       let uri = "http://localhost:8000/jobs/" + this.$route.params.id;
-      this.axios.post(uri, this.item).then((response) => {
+      this.axios.put(uri, this.item).then((response) => {
         this.item = response.data;
         this.$router.push({ name: "Index" });
       });
