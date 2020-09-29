@@ -5,24 +5,32 @@
         <h3>Post A Job....</h3>
       </div>
       <div class="card-body">
-        <form v-on:submit.prevent="addItem">
+        <form v-on:submit.prevent="addItem" method="post">
           <label>Job title:</label>
-          <input type="text" class="form-control" v-model="job_title" />
+          <input type="text" class="form-control" v-model="item.job_title" />
 
           <label>Job desc:</label>
-          <input type="text" class="form-control" v-model="job_description" />
+          <input
+            type="text"
+            class="form-control"
+            v-model="item.job_Description"
+          />
 
           <label>Job requirements:</label>
-          <input type="text" class="form-control" v-model="job_requirements" />
+          <input
+            type="text"
+            class="form-control"
+            v-model="item.job_requirements"
+          />
 
           <label>Job locations:</label>
-          <input type="text" class="form-control" v-model="job_locations" />
+          <input type="text" class="form-control" v-model="item.job_location" />
 
           <label>Job timings:</label>
-          <input type="text" class="form-control" v-model="job_timings" />
+          <input type="text" class="form-control" v-model="item.job_timings" />
 
           <label>Job salary:</label>
-          <input type="text" class="form-control" v-model="job_salary" />
+          <input type="text" class="form-control" v-model="item.job_salary" />
 
           <input type="submit" class="btn btn-primary" value="Add job" />
         </form>
@@ -33,20 +41,24 @@
 
 <script>
 export default {
-  //   components: {
-  // name: "AddItem",
-  //   },
   data() {
     return {
-      item: {},
+      item: {
+        job_title: null,
+        job_Description: null,
+        job_requirements: null,
+        job_location: null,
+        job_timings: null,
+        job_salary: null,
+      },
     };
   },
   methods: {
     addItem() {
-      let uri = "http://localhost:8000/jobs/add";
+      // let uri = "http://localhost:8000/jobs/add";
       this.axios
-        .post(uri, this.item)
-        .then((response) => console.log(response.data));
+        .post("http://localhost:8000/jobs/add/", this.item)
+        .then((response) => console.log(response));
     },
   },
 };
