@@ -9,30 +9,47 @@
           <div class="form-group">
             <label>Job title:</label>
 
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" v-model="item.job_title" />
           </div>
           <div class="form-group">
             <label>Job desc:</label>
-            <input type="text" class="form-control" />
+            <input
+              type="text"
+              class="form-control"
+              v-model="item.job_Description"
+            />
           </div>
           <div class="form-group">
             <label>Job requirements:</label>
-            <input type="text" class="form-control" />
+            <input
+              type="text"
+              class="form-control"
+              v-model="item.job_requirements"
+            />
           </div>
           <div class="form-group">
             <label>Job locations:</label>
-            <input type="text" class="form-control" />
+            <input
+              type="text"
+              class="form-control"
+              v-model="item.job_location"
+            />
           </div>
           <div class="form-group">
             <label>Job timings:</label>
-            <input type="text" class="form-control" />
+            <input
+              type="text"
+              class="form-control"
+              v-model="item.job_timings"
+            />
           </div>
           <div class="form-group">
             <label>Job salary:</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" v-model="item.job_salary" />
           </div>
           <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Update Item" />
+            <!-- <input type="submit" class="btn btn-primary" value="Update Item"  /> -->
+            <button v-on:click="updateItem">Update</button>
           </div>
         </form>
       </div>
@@ -43,7 +60,14 @@
 export default {
   data() {
     return {
-      item: {},
+      item: {
+        job_title: null,
+        job_Description: null,
+        job_requirements: null,
+        job_location: null,
+        job_timings: null,
+        job_salary: null,
+      },
       name: "",
     };
   },
