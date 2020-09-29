@@ -18,16 +18,25 @@
             >Job-finder</router-link
           >
         </h4>
-        <li class="nav-item">
-          <router-link :to="{ name: 'Create' }" class="nav-link"
-            >Add Item</router-link
-          >
-        </li>
+        <router-link :to="{ name: 'Create' }" class="nav-link"
+          >Add new job</router-link
+        >
+      </ul>
+      <ul>
+        <router-link
+          v-if="authenticated"
+          to="/login"
+          v-on:click.native="logout()"
+          replace
+        >
+          Logout
+        </router-link>
       </ul>
     </nav>
+    <!-- <router-view @authenticated="setAuthenticated" /> -->
     <transition name="fade">
       <div class="gap">
-        <router-view></router-view>
+        <router-view @authenticated="setAuthenticated" />
       </div>
     </transition>
   </div>
@@ -35,7 +44,31 @@
 
 
 <script>
-export default {};
+export default {
+  name: "App",
+  data() {
+    return {
+      authenticated: false,
+      fakeAccount: {
+        username: "recruiter@screel.in",
+        password: "password123",
+      },
+    };
+  },
+  mounted() {
+    if (!this.authenticated) {
+      this.router.replace({ name: "Login" });
+    }
+  },
+  methods: {
+    setAuthenticated(status) {
+      this.authenticated = status;
+    },
+    logout() {
+      this.authenticated = false;
+    },
+  },
+};
 </script>
 
 
