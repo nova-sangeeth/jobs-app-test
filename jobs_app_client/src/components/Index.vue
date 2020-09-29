@@ -10,14 +10,14 @@
           <h6 class="card-subtitle mb-2 text-muted">
             {{ item.job_requirements }}
           </h6>
-          <p class="card-text">
+          <p class="card-subtitle mb-2 text-muted">
             {{ item.job_Description }}
           </p>
           <p class="card-text">Location: {{ item.job_location }}</p>
           <p class="card-text">salary: {{ item.job_salary }}</p>
           <p class="card-text">timing: {{ item.job_timings }}</p>
           <div v-if="item.applied === false">
-            <p class="btn btn-success">Available: Still Open</p>
+            <p class="btn btn-success">Job Status: Still Open</p>
           </div>
           <div v-else-if="item.applied === true">
             <p class="btn btn-danger">Applied: {{ item.applied }}</p>

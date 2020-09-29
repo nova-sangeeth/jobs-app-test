@@ -5,15 +5,13 @@ import VueRouter from 'vue-router'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/nprogress/nprogress.css';
 import NProgress from 'nprogress';
-
-
 // component imports
-
 import App from './App.vue'
 import Create from './components/Create.vue'
 import Edit from './components/Edit.vue'
 import Index from './components/Index.vue'
 import Apply from './components/Apply.vue'
+import login from './components/login.vue'
 
 
 Vue.use(VueRouter);
@@ -41,6 +39,11 @@ const routes = [
     name: 'Apply',
     path: '/apply',
     component: Apply
+  },
+  {
+    name: 'Login',
+    path: '/login',
+    component: login
   },
 ];
 
