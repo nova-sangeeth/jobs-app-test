@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <h1>Jobs Available.</h1>
+    <p class="display-4">Job Openings</p>
 
     <div v-for="item in items" :key="item.id">
       <div class="card" style="width: ">
@@ -20,7 +20,7 @@
             <p class="btn btn-success">Job Status: Still Open</p>
           </div>
           <div v-else-if="item.applied === true">
-            <p class="btn btn-danger">Applied: {{ item.applied }}</p>
+            <p class="btn btn-danger">Job Closed</p>
           </div>
           <div style="float: right">
             <router-link
@@ -33,9 +33,9 @@
               class="btn btn-primary"
               >Apply</router-link
             >
-            <!-- <button class="btn btn-danger" v-on:click="deleteItem(item.id)">
+            <button class="btn btn-danger" v-on:click="deleteItem(item.id)">
               Delete
-            </button> -->
+            </button>
           </div>
         </div>
       </div>
@@ -45,6 +45,7 @@
 
 <script>
 export default {
+  // name = "job_delete",
   data() {
     return {
       items: [],
@@ -56,6 +57,7 @@ export default {
   },
 
   methods: {
+    // ...mapActions(["job_delete"]),
     fetchItems() {
       let uri = "http://localhost:8000/jobs";
       this.axios.get(uri).then((response) => {
@@ -63,11 +65,14 @@ export default {
         console.log(response.data);
       });
     },
-    deleteItem(job_id) {
-      let uri = "http://localhost:8000/jobs/" + job_id;
-      this.items.splice(job_id, 1);
+
+    deleteItem(id) {
+      let uri = "http://localhost:8000/jobs/" + id;
+      // this.items.splice(id);
+      this.items.splice(this.items.indexOf(id));
       // this.axios.delete(uri);
       // console.log(this.uri);
+      console.log(this.items);
       return this.axios.delete(uri);
     },
   },
