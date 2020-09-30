@@ -15,13 +15,13 @@ app = FastAPI()
 
 class Jobs(Model):
     id = fields.IntField(pk=True)
-    job_title = fields.CharField(128)
-    job_Description = fields.CharField(128)
-    job_requirements = fields.CharField(128)
-    job_location = fields.CharField(128)
-    job_timings = fields.CharField(128)
-    job_salary = fields.IntField()
-    applied = fields.BooleanField(default=False)
+    job_title = fields.CharField(128, null=True)
+    job_description = fields.CharField(128, null=True)
+    job_requirements = fields.CharField(128, null=True)
+    job_location = fields.CharField(128, null=True)
+    job_timings = fields.CharField(128, null=True)
+    job_salary = fields.IntField(null=True)
+    applied = fields.BooleanField(default=False, null=True)
 
 
 Jobs_Pydantic = pydantic_model_creator(Jobs, name="Jobs")
@@ -38,7 +38,7 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -71,14 +71,14 @@ async def get_job_by_id(job_id: int):
 
 
 # delete_by_id
-@app.delete("/jobs/{job_id}")
+@app.delete("/jobs/delete/{job_id}")
 async def delete_job(job_id: int):
     await Jobs.filter(id=job_id).delete()
     return {"deleted": "object"}
 
 
 # update_by_id
-@app.put("/jobs/{job_id}", response_model=Jobs_Pydantic)
+@app.put("/jobs/update/{job_id}", response_model=Jobs_Pydantic)
 async def update_job(job_id: int, job: JobsIn_Pydantic):
     await Jobs.filter(id=job_id).update(**job.dict(exclude_unset=True, exclude={"id"}))
     return await Jobs_Pydantic.from_queryset_single(Jobs.get(id=job_id))
