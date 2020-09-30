@@ -45,7 +45,15 @@
           </div>
           <div class="form-group">
             <label>Job salary:</label>
-            <input type="text" class="form-control" v-model="item.job_salary" />
+            <input
+              type="text"
+              class="form-control"
+              v-model.number="item.job_salary"
+            />
+          </div>
+          <div class="form-group">
+            <label>availability:</label>
+            <input type="text" class="form-control" v-model="item.applied" />
           </div>
           <div class="form-group">
             <!-- <input type="submit" class="btn btn-primary" value="Update Item"  /> -->
@@ -62,12 +70,13 @@ export default {
     return {
       item: {
         job_title: null,
-        job_Description: null,
+        job_description: null,
         job_requirements: null,
         job_location: null,
         job_timings: null,
         job_salary: null,
       },
+
       name: "",
     };
   },
@@ -82,13 +91,12 @@ export default {
       });
     },
     updateItem() {
-      // let uri = "http://localhost:8000/jobs/" + this.$route.params.id;
-      this.axios
-        .update("http://localhost:8000/jobs/" + this.$route.params.id)
-        .then(
-          (response) => console.log(response),
-          this.$router.push({ name: "Index" })
-        );
+      let uri = "http://localhost:8000/jobs/update/" + this.$route.params.id;
+      console.log(uri);
+      this.axios.put(uri, this.item).then((response) => {
+        console.log(response);
+        this.$router.push({ name: "Index" });
+      });
     },
   },
 };
