@@ -45,35 +45,25 @@
 
 <script>
 export default {
-  // name = "job_delete",
   data() {
     return {
       items: [],
     };
   },
-
   created: function () {
     this.fetchItems();
   },
-
   methods: {
-    // ...mapActions(["job_delete"]),
     fetchItems() {
       let uri = "http://localhost:8000/jobs";
       this.axios.get(uri).then((response) => {
         this.items = response.data;
-        console.log(response.data);
       });
     },
-
     deleteItem(id) {
-      let uri = "http://localhost:8000/jobs/" + id;
-      // this.items.splice(id);
-      this.items.splice(this.items.indexOf(id));
-      // this.axios.delete(uri);
-      // console.log(this.uri);
-      console.log(this.items);
-      return this.axios.delete(uri);
+      let uri = "http://localhost:8000/jobs/delete/" + id;
+      this.items.splice(id, -1);
+      this.axios.delete(uri);
     },
   },
 };
