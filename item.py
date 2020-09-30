@@ -32,6 +32,7 @@ origins = [
     "http://172.17.72.240:8080/",
     "http://localhost",
     "http://localhost:8080",
+    "http://localhost:8081",
     "http://localhost:8000",
 ]
 
