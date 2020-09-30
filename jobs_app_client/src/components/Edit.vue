@@ -16,7 +16,7 @@
             <input
               type="text"
               class="form-control"
-              v-model="item.job_Description"
+              v-model="item.job_description"
             />
           </div>
           <div class="form-group">
