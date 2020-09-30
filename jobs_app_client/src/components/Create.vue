@@ -32,8 +32,8 @@
           <label>Job salary:</label>
           <input type="text" class="form-control" v-model="item.job_salary" />
 
-          <label>Job status:</label>
-          <input type="text" class="form-control" v-model="item.applied" />
+          <!-- <label>Job status:</label> -->
+          <!-- <input type="text" class="form-control" v-model="item.applied" /> -->
 
           <input type="submit" class="btn btn-primary" value="Add job" />
         </form>
@@ -44,9 +44,6 @@
 
 <script>
 export default {
-  // components: {
-  //   name: "AddItem",
-  // },
   data() {
     return {
       item: {},
