@@ -82,11 +82,13 @@ export default {
       });
     },
     updateItem() {
-      let uri = "http://localhost:8000/jobs/" + this.$route.params.id;
-      this.axios.put(uri, this.item).then((response) => {
-        this.item = response.data;
-        this.$router.push({ name: "Index" });
-      });
+      // let uri = "http://localhost:8000/jobs/" + this.$route.params.id;
+      this.axios
+        .update("http://localhost:8000/jobs/" + this.$route.params.id)
+        .then(
+          (response) => console.log(response),
+          this.$router.push({ name: "Index" })
+        );
     },
   },
 };
