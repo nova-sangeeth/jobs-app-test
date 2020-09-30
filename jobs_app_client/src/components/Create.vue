@@ -13,7 +13,7 @@
           <input
             type="text"
             class="form-control"
-            v-model="item.job_Description"
+            v-model="item.job_description"
           />
 
           <label>Job requirements:</label>
@@ -32,6 +32,9 @@
           <label>Job salary:</label>
           <input type="text" class="form-control" v-model="item.job_salary" />
 
+          <label>Job status:</label>
+          <input type="text" class="form-control" v-model="item.applied" />
+
           <input type="submit" class="btn btn-primary" value="Add job" />
         </form>
       </div>
@@ -41,24 +44,20 @@
 
 <script>
 export default {
+  // components: {
+  //   name: "AddItem",
+  // },
   data() {
     return {
-      item: {
-        job_title: null,
-        job_Description: null,
-        job_requirements: null,
-        job_location: null,
-        job_timings: null,
-        job_salary: null,
-      },
+      item: {},
     };
   },
   methods: {
     addItem() {
-      // let uri = "http://localhost:8000/jobs/add";
+      let uri = "http://localhost:8000/jobs/add";
       this.axios
-        .post("http://localhost:8000/jobs/add/", this.item)
-        .then((response) => console.log(response));
+        .post(uri, this.item)
+        .then((response) => console.log(response.data));
     },
   },
 };
