@@ -51,10 +51,10 @@
               v-model.number="item.job_salary"
             />
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>availability:</label>
             <input type="text" class="form-control" v-model="item.applied" />
-          </div>
+          </div> -->
           <div class="form-group">
             <!-- <input type="submit" class="btn btn-primary" value="Update Item"  /> -->
             <button v-on:click="updateItem">Update</button>
@@ -84,6 +84,13 @@ export default {
     this.getItem();
   },
   methods: {
+    // getItem() {
+    //   let uri = "http://localhost:8000/jobs/" + this.$route.params.id;
+    //   this.axios.get(uri).then((response) => {
+    //     console.log(response.data);
+    //     this.item = response.data;
+    //   });
+    // },
     getItem() {
       let uri = "http://localhost:8000/jobs/" + this.$route.params.id;
       this.axios.get(uri).then((response) => {
