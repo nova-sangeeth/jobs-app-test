@@ -87,8 +87,22 @@ export default {
     getItem() {
       let uri = "http://localhost:8000/jobs/" + this.$route.params.id;
       this.axios.get(uri).then((response) => {
-        console.log(response.data);
-        this.item = response.data;
+        let {
+          job_title,
+          job_description,
+          job_requirements,
+          job_location,
+          job_timings,
+          job_salary,
+        } = response.data;
+        this.item = {
+          job_title,
+          job_description,
+          job_requirements,
+          job_location,
+          job_timings,
+          job_salary,
+        };
       });
     },
     updateItem() {
