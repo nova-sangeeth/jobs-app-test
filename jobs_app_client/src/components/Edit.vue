@@ -69,12 +69,12 @@ export default {
   data() {
     return {
       item: {
-        job_title: null,
-        job_description: null,
-        job_requirements: null,
-        job_location: null,
-        job_timings: null,
-        job_salary: null,
+        job_title: "",
+        job_description: "",
+        job_requirements: "",
+        job_location: "",
+        job_timings: "",
+        job_salary: "",
       },
 
       name: "",
