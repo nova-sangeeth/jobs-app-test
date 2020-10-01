@@ -87,6 +87,7 @@ export default {
     getItem() {
       let uri = "http://localhost:8000/jobs/" + this.$route.params.id;
       this.axios.get(uri).then((response) => {
+        console.log(response.data);
         this.item = response.data;
       });
     },
@@ -94,7 +95,9 @@ export default {
       let uri = "http://localhost:8000/jobs/update/" + this.$route.params.id;
       console.log(uri);
       this.axios.put(uri, this.item).then((response) => {
+        console.log(uri);
         console.log(response);
+        this.item = response.data();
         this.$router.push({ name: "Index" });
       });
     },
