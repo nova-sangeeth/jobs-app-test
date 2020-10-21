@@ -57,6 +57,12 @@ async def get_all_jobs():
     return await Jobs_Pydantic.from_queryset(Jobs.all())
 
 
+# blank field
+@app.get("/")
+async def index():
+    return {"Hello There, Welcome to the jobs api."}
+
+
 # show by id
 @app.get("/jobs/{job_id}")
 async def get_job_by_id(job_id: int):
