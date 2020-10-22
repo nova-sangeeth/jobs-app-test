@@ -33,6 +33,14 @@ class companies_available(Model):
 Jobs_Pydantic = pydantic_model_creator(Jobs, name="Jobs")
 JobsIn_Pydantic = pydantic_model_creator(Jobs, name="JobsIn", exclude_readonly=True)
 
+# pydantic generation for companies available;
+companies_available_Pydantic = pydantic_model_creator(
+    companies_available, name="companies_available"
+)
+companies_available_InPydantic = pydantic_model_creator(
+    companies_available, name="companies_availableIn", exclude_readonly=True
+)
+
 
 origins = [
     "http://172.17.72.240:8080/",
