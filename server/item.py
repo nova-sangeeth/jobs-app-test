@@ -24,6 +24,12 @@ class Jobs(Model):
     applied = fields.BooleanField(default=False, null=True)
 
 
+class companies_available(Model):
+    id = fields.IntField(pk=True)
+    company_name = fields.CharField(256, null=True)
+    company_location = fields.CharField(128, null=True)
+
+
 Jobs_Pydantic = pydantic_model_creator(Jobs, name="Jobs")
 JobsIn_Pydantic = pydantic_model_creator(Jobs, name="JobsIn", exclude_readonly=True)
 
