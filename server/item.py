@@ -118,6 +118,26 @@ async def get_all_companies():
     return await companies_available_Pydantic.from_queryset(companies_available.all())
 
 
+@app.get("/companies/{company_id}/")
+async def get_companies_by_id(company_id: int):
+    return await companies_available_Pydantic.from_queryset_single(
+        companies_available.get(id=company_id)
+    )
+
+
+# update needs a response to add a response model always for tortoise orm.
+@app.put("/company/update/{company_id}/", response_model=companies_available_Pydantic)
+async def update_company_by_id(
+    company_id: int, company: companies_available_InPydantic
+):
+    await companies_available.filter(id=company_id).update(
+        **company.dict(exclude_unset=True, exclude={"id"})
+    )
+    return await companies_available_Pydantic.from_queryset_single(
+        companies_available.get(id=company_id)
+    )
+
+
 register_tortoise(
     app,
     db_url="sqlite://db.sqlite3",
