@@ -104,6 +104,20 @@ async def update_job(job_id: int, job: JobsIn_Pydantic):
     return await Jobs_Pydantic.from_queryset_single(Jobs.get(id=job_id))
 
 
+# endpoints for companies available.:
+@app.post("/companies/add")
+async def add_companies(company: companies_available_InPydantic):
+    company_obj = await companies_available.create(
+        **company.dict(exclude_unset=True, exclude={"id"})
+    )
+    return await companies_available_InPydantic.from_tortoise_orm(company_obj)
+
+
+@app.get("/companies/all")
+async def get_all_companies():
+    return await companies_available_Pydantic.from_queryset(companies_available.all())
+
+
 register_tortoise(
     app,
     db_url="sqlite://db.sqlite3",
