@@ -138,6 +138,12 @@ async def update_company_by_id(
     )
 
 
+@app.delete("/company/delete/{company_id}/")
+async def delete_company(company_id: int):
+    await companies_available.filter(id=company_id).delete()
+    return {"company": "deleted"}
+
+
 register_tortoise(
     app,
     db_url="sqlite://db.sqlite3",
