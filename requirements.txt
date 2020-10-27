@@ -1,3 +1,4 @@
+aiofiles==0.5.0
 aiosqlite==0.15.0
 appdirs==1.4.3
 atlastk==0.12
@@ -20,7 +21,9 @@ hyperframe==6.0.0
 idna==2.8
 ipaddr==2.2.0
 iso8601==0.1.13
+Jinja2==2.11.2
 lockfile==0.12.2
+MarkupSafe==1.1.1
 msgpack==0.6.2
 mypy-extensions==0.4.3
 packaging==20.3
@@ -44,5 +47,6 @@ tortoise-orm==0.16.16
 typed-ast==1.4.1
 typing-extensions==3.7.4.3
 urllib3==1.25.8
+uvicorn==0.12.0
 webencodings==0.5.1
 wsproto==0.15.0
