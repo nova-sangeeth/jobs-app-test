@@ -26,6 +26,10 @@ class Jobs(Model):
     job_salary = fields.IntField(null=True)
     applied = fields.BooleanField(default=False, null=True)
 
+class jobapplication(Model):
+    id = fields.IntField(pk=True)
+    job_id = fields.ForeignKeyField('models.Jobs', related_name='jobapplication', on_delete='CASCADE', db_constraint=True, null= True)
+    comments = fields.CharField(256, null=True)
 
 class companies_available(Model):
     id = fields.IntField(pk=True)
