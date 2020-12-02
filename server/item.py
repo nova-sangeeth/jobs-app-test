@@ -6,6 +6,7 @@ from fastapi import FastAPI
 from fastapi.encoders import jsonable_encoder
 from fastapi.middleware.cors import CORSMiddleware
 from tortoise import fields
+from tortoise.fields.relational import ForeignKeyField
 from tortoise.models import Model
 from tortoise.contrib.fastapi import register_tortoise
 from tortoise.contrib.pydantic import pydantic_model_creator
@@ -30,7 +31,7 @@ class jobapplication(Model):
     id = fields.IntField(pk=True)
     job_id = fields.ForeignKeyField('models.Jobs', related_name='jobapplication', on_delete='CASCADE', db_constraint=True, null= True)
     comments = fields.CharField(256, null=True)
-
+    
 class companies_available(Model):
     id = fields.IntField(pk=True)
     company_name = fields.CharField(256, null=True)
@@ -47,7 +48,8 @@ companies_available_Pydantic = pydantic_model_creator(
 companies_available_InPydantic = pydantic_model_creator(
     companies_available, name="companies_availableIn", exclude_readonly=True
 )
-
+job_application_pydantic = pydantic_model_creator(jobapplication, name= "job_application")
+jobIn_application_pydantic = pydantic_model_creator(jobapplication, name= "jobIn_application", exclude_readonly=True)
 
 origins = [
     "http://172.17.72.240:8080/",
