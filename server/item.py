@@ -150,6 +150,16 @@ async def delete_company(company_id: int):
     await companies_available.filter(id=company_id).delete()
     return {"company": "deleted"}
 
+@app.post('/jobs/apply/{job_id}', response_model=job_application_pydantic)
+async def apply_job(job_apply: jobIn_application_pydantic, job_id: int):
+    job_application_obj = await jobapplication.create(
+        **job_apply.dict(exclude_unset=True, exclude={"id"})
+    )
+    return await jobIn_application_pydantic.from_tortoise_orm(job_application_obj)
+
+    
+
+
 
 register_tortoise(
     app,
